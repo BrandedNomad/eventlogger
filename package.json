@@ -1,0 +1,23 @@
+{
+  "name": "eventlogger",
+  "version": "1.0.0",
+  "description": "Simple event logger for node servers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrandedNomad/eventlogger.git"
+  },
+  "keywords": [
+    "event",
+    "logger"
+  ],
+  "author": "brandednomad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrandedNomad/eventlogger/issues"
+  },
+  "homepage": "https://github.com/BrandedNomad/eventlogger#readme"
+}
