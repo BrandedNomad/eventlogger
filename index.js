@@ -1,29 +1,18 @@
-import fs from 'fs'
-import path from "path/posix";
+const fs = require('fs')
+const path = require('path')
 
-interface LogParams {
-    message: string;
-    ip?: string;
-    user?: string;
-    url?: string;
-    info?: string;
-}
 
 class Logger {
 
-    private config:{
-        logFilePath:string
-    }
-
-    constructor(config:{logFilePath:string}) {
+    constructor(config) {
         this.config = config
     }
 
-    getConfig():{}{
+    getConfig(){
         return this.config
     }
 
-    private writeToFile(content:string){
+    writeToFile(content){
         try {
             fs.appendFile(path.join(__dirname,this.config.logFilePath), content, err => {
                 if (err) {
@@ -39,7 +28,7 @@ class Logger {
 
     //	An event that describes the successful operation of a task, such as an application, driver, or service. For example,
     //	an Information event is logged when a network driver loads successfully.
-    info(logParams:LogParams){
+    info(logParams){
         const date = new Date()
         const log = {
             type:"INFO",
@@ -49,13 +38,13 @@ class Logger {
             user: logParams.user || "",
             url: logParams.url || ''
         }
-        const messageToLog: string = `${log.type}: ${log.date}. ${log.message}. User: ${log.user}. Ip: ${log.ip}. URL: ${log.url}`
+        const messageToLog = `${log.type}: ${log.date}. ${log.message}. User: ${log.user}. Ip: ${log.ip}. URL: ${log.url}`
         this.writeToFile(messageToLog)
     }
 
     //An event that is not necessarily significant, however, may indicate the possible occurrence of a future problem.
     // For example, a Warning message is logged when disk space starts to run low
-    warn(logParams:LogParams){
+    warn(logParams){
         const date = new Date()
         const log = {
             type:"WARN",
@@ -65,13 +54,13 @@ class Logger {
             user: logParams.user || '',
             url: logParams.url || ''
         }
-        const messageToLog: string = `${log.type}: ${log.date}. ${log.message}. User: ${log.user}. Ip: ${log.ip}. TargetURL: ${log.url}`
+        const messageToLog = `${log.type}: ${log.date}. ${log.message}. User: ${log.user}. Ip: ${log.ip}. TargetURL: ${log.url}`
         this.writeToFile(messageToLog)
     }
 
     //An event that indicates a significant problem such as loss of data or loss of functionality.
     // For example, if a service fails to load during startup, an Error event is logged.
-    error(logParams:LogParams){
+    error(logParams){
         const date = new Date()
         const log = {
             type:"ERROR",
@@ -82,7 +71,7 @@ class Logger {
             url: logParams.url || '',
             info:logParams.info || ''
         }
-        const messageToLog: string = `${log.type}: ${log.date}. ${log.message}. User: ${log.user}. Ip: ${log.ip}. TargetURL: ${log.url}`
+        const messageToLog = `${log.type}: ${log.date}. ${log.message}. User: ${log.user}. Ip: ${log.ip}. TargetURL: ${log.url}`
         this.writeToFile(messageToLog)
     }
 
@@ -90,4 +79,4 @@ class Logger {
 }
 
 
-export = Logger
+module.exports = Logger
